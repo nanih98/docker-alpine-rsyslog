@@ -32,7 +32,7 @@
             # If you need to add more custom files to rsyslog
             # - /srv/rsyslog/conf/rsyslog:/etc/rsyslog.d/
 ```
-# Startint the container
+# Startig the container
 
 When the container is starting, new logrotate config are created with the env values specified in the docker-compose. (just above).(init.sh in the entrypoint).
 
