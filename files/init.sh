@@ -35,9 +35,7 @@ else
 fi
 
 # Create cron to execute logrotate with the file that we previosuly create
-if [ ! -f /etc/crontabs/root ]; then
-echo "*/5 * * * * root logrotate /etc/logrotate.d/rsyslog" > /etc/cron.d/logrotate
-fi
+echo "*/5 * * * * logrotate /etc/logrotate.d/rsyslog" >> /etc/crontabs/root
 
 # Execute supervisord daemon to start rsyslogd and crond processes
 exec /usr/bin/supervisord -n -c /etc/supervisord/supervisord.conf
