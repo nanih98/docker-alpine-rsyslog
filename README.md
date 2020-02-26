@@ -59,7 +59,6 @@ services:
     volumes:
       - /srv/mysql:/var/lib/mysql
   wordpress:
-          #image: wordpress:5
     image: nanih98/wordpress:php7.4-redis
     container_name: wordpress
     hostname: wordpress
