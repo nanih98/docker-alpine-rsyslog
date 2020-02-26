@@ -111,3 +111,19 @@ services:
     volumes:
         # Directory where logs are saved
         - /srv/rsyslog/log/:/var/log/
+```
+
+
+**There are probably other better ways to concentrate logs, such as elastic.**
+
+Since many times you cannot have such large infrastructures for economic reasons (among others), this is a possible configuration to concentrate the logs on the same host.
+
+We could avoid creating the logspout and another container with rsyslog, simply by using the syslog driver in the containers and sending the logs to the machine's own rsyslog. But after several configurations, I see it very 'cumbersome' to play the rsyslog of the system itself. I prefer to have an exclusive rsyslog for the logs of my containers and have logspout to send them to me.
+
+# Why logspout?
+
+Because if I configure the syslog driver in docker, it won't let me do a simple 'docker logs' and that doesn't interest me. Instead with this architecture, I have the concentrated logs and allows me to make a docker logs container_name.
+
+# Questions?
+
+**devopstech253@gmail.com**
