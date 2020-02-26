@@ -124,7 +124,7 @@ We could avoid creating the logspout and another container with rsyslog, simply 
 
 Because if I configure the syslog driver in docker, it won't let me do a simple 'docker logs' and that doesn't interest me. Instead with this architecture, I have the concentrated logs and allows me to make a docker logs container_name.
 
-# This is the other possible solution of sending the logs to the rsyslog (docker container) without having to have logspout, but as I say, we would not be allowed to execute the docker logs.
+## This is the other possible solution of sending the logs to the rsyslog (docker container) without having to have logspout, but as I say, we would not be allowed to execute the docker logs.
 
 ```
   wordpress:
