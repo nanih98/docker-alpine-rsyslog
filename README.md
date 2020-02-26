@@ -126,7 +126,7 @@ Because if I configure the syslog driver in docker, it won't let me do a simple 
 
 ## This is the other possible solution of sending the logs to the rsyslog (docker container) without having to have logspout, but as I say, we would not be allowed to execute the docker logs.
 
-```
+```yaml
   wordpress:
     image: nanih98/wordpress:php7.4-redis
     container_name: wordpress
