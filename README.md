@@ -1,26 +1,10 @@
-Container per controlar els logs d'altres dockers i serveis amb el tag.
+# Documentation
 
-La configuració ja separa per tag i servei els logs.
-
-Per a que un docker utilitzi aquest rsyslog cal afegir els paràmetres següents de un service de docker-compose:
-
-```sh
-...
-    logging:
-        driver: syslog
-        options:
-            syslog-address: "udp://[ip_rsyslog]:514"
-            syslog-facility: "daemon"
-            tag: "{{.Name}}"
-...
-```
-Sempre usem el facility de daemon.
-
-Execució del docker amb docker-compose:
+## Example docker compose:
 
 ```sh
     rsyslog:
-        image: ackstorm/alpine-rsyslog:ack3
+        image: nanih98/docker-alpine-rsyslog:latest
         container_name: rsyslog
         restart: always
         logging:
@@ -34,26 +18,22 @@ Execució del docker amb docker-compose:
             - ROTATE_NUM=7
             - ROTATE_MAXSIZE=20M
         ports:
-            - "0.0.0.0:514:514/udp"
+            - "514:514/udp"
         volumes:
-            # Directori de logs
+            # Directory where logs are saved
             - /srv/rsyslog/log/:/var/log/
-            # Config adicional logrotate
+            # Mapping logrotate config
             #- /srv/rsyslog/conf/logrotate.d:/etc/logrotate.d
-            # crons 
+            # Crons  
             #- /srv/rsyslog/conf/crontabs:/etc/crontabs
-            # Si necessitem exportar el /dev/log
-            #- /srv/rsyslog/dev/:/dev/:rw
-            # Si la hora no es GMT+0:
+            # Take the localtime equal to the host
             #- /etc/timezone:/etc/timezone:ro
             #- /etc/localtime:/etc/localtime:ro
-            # Si necessitem afegir més configs de rsyslog
-            #- /srv/rsyslog/etc/custom.conf:/etc/rsyslog.d/99-custom.conf:ro
+            # If you need to add more custom files to rsyslog
+            # - /srv/rsyslog/conf/rsyslog:/etc/rsyslog.d/
 ```
+# Startint the container
 
-Al arrancar el docker se copiarán los archivos de configuración /etc/logrotate.d/logrotate.conf y /etc/crontabs/crontabs.
+When the container is starting, new logrotate config are created with the env values specified in the docker-compose. (just above).(init.sh in the entrypoint).
 
-En el caso de logrotate.conf se podrán usar las variables de entorno siempre que mantengamos el archivo base. Pero se rotarán todos los archivos igual (*.log).
-Si queremos realizar diferentes politicas de rotado eliminar el tag "# default ackstorm logrotate", quitar "/var/log/*.log" y añadir los archivos de config que queramos.
-
-Podemos añadir crons diferentes montando en un volumen y modificando el archivo root. No hay que poner el usuario ya que es el cron de root.
+**If you want to change this configuration, just change de init.sh or map the logrotate directory to the host and change the necessary files**
