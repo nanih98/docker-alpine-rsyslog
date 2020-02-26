@@ -52,10 +52,10 @@ services:
     hostname: mariadb
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: ausias@38@@@.#!?blablabla9982|root
+      MYSQL_ROOT_PASSWORD: rotrotrotrotrotorotororotot
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
-      MYSQL_PASSWORD: pijuan@253@@.#!blablabla
+      MYSQL_PASSWORD: wordpress
     volumes:
       - /srv/mysql:/var/lib/mysql
   wordpress:
@@ -74,7 +74,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: pijuan@253@@.#!blablabla 
+      WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
   redis:
     image: redis:5-alpine
