@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-LABEL name="nanih98/alpine-rsyslog"
+LABEL name="nanih98/docker-alpine-rsyslog"
 LABEL MAINTAINER "Daniel Cascales Romero<devopstech253@gmail.com>"
 
 # Install base system
