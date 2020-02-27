@@ -16,10 +16,8 @@ RUN set -eux ;\
     py-cryptography ;\
     pip install --upgrade pip 
 
-# rsyslog: Evitem que es faci log de tot cap a messages
-#RUN sed -i /etc/rsyslog.conf  -e 's%^\(\*.*/messages.*\)$%#\1%'
 
-
+# Delete default config of rsyslog
 RUN rm -f /etc/logrotate.d/rsyslog
 
 # rsyslog: Config custom files
